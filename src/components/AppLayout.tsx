@@ -7,7 +7,7 @@ import { ROLES, useRole, type Role } from '../roles'
 import { todoCount } from '../data/todos'
 import { SearchField, SearchPalette } from './SearchPalette'
 import { ButtonPrimary } from './ui'
-import { TEAMS, useClub, type TeamKey } from '../club'
+import { TEAMS, type TeamKey } from '../club'
 
 /* Navigation (research report, "Une barre latérale visible, élaguée par rôle"):
  * - every space the role can use is always visible, with an icon AND a label;
@@ -102,7 +102,6 @@ function MyTeams() {
 
 function RoleSwitcher() {
   const { role, setRole, me } = useRole()
-  const { readable, setReadable } = useClub()
   return (
     <div className="border-t border-border-default pt-3">
       <div className="flex items-center gap-2.5 px-1">
@@ -117,16 +116,8 @@ function RoleSwitcher() {
           <p className="truncate text-[13px] text-text-secondary">{me.title}</p>
         </div>
       </div>
-      <label className="mt-3 flex min-h-10 cursor-pointer items-center gap-2.5 px-1 text-sm">
-        <input
-          type="checkbox"
-          checked={readable}
-          onChange={(e) => setReadable(e.target.checked)}
-          className="size-[18px] accent-[var(--color-action-primary)]"
-        />
-        Lisibilité renforcée
-      </label>
-      <label className="mt-2 block px-1 text-[13px] font-medium text-text-tertiary" htmlFor="role-switch">
+
+      <label className="mt-3 block px-1 text-[13px] font-medium text-text-tertiary" htmlFor="role-switch">
         Voir en tant que (prototype)
       </label>
       <select
