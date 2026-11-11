@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+/* Visual system "H" (research report « Esthétique des back-offices »):
+ * warm neutrals, near-black ink for actions, ONE club colour used sparingly,
+ * locked status tones (icon + label), flat surfaces with fine borders. */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Neutrals (warm, low chroma) */
+  --color-bg-page: #faf9f6;
+  --color-bg-surface: #ffffff;
+  --color-bg-subtle: #f3f1ec;
+  --color-border-default: #e6e3dd;
+  --color-border-strong: #d9d5ce;
+  --color-text-primary: #1f1c18;
+  --color-text-secondary: #5c5750;
+  --color-text-tertiary: #6b665e;
+  --color-text-inverse: #ffffff;
+
+  /* Primary action = ink (never confused with a status or the club colour) */
+  --color-action-primary: #1f1c18;
+  --color-action-primary-hover: #36322c;
+
+  /* Club identity (set per club in Paramètres; default LLC burnt orange) */
+  --color-club: var(--club, #c2410c);
+  --color-club-text: var(--club-text, #ffffff);
+
+  /* Status tones — locked, independent of the club */
+  --color-success-bg: #e3f1e6;
+  --color-success-fg: #1d6234;
+  --color-info-bg: #e6edf8;
+  --color-info-fg: #22508c;
+  --color-warning-bg: #fcefd6;
+  --color-warning-fg: #7b4504;
+  --color-danger-bg: #fbe6e2;
+  --color-danger-fg: #9b2516;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'ss02' 1; /* I/l/1 disambiguation; aligned figures via .tabular-nums where numbers stack */
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+@media (min-width: 1024px) {
+  body {
+    font-size: 15px;
+    line-height: 22px;
+  }
+}
+
+/* « Lisibilité renforcée » (profile option): hyper-legible face, slightly larger UI */
+html.readable body {
+  font-family: 'Atkinson Hyperlegible Next', 'Inter', system-ui, sans-serif;
+}
+html.readable #root {
+  zoom: 1.08;
+}
+
+/* Aligned figures in tables (amounts, dates, counts) */
+td,
+th {
+  font-variant-numeric: tabular-nums;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+@layer base {
+  button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-action-primary);
+    outline-offset: 2px;
+  }
+}
